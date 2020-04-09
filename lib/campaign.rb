@@ -39,7 +39,7 @@ class Campaign
     def calculate_subtotal(attrs = {})
         case @type
         when 0
-            raise 'Campaign does not do subtotals'
+            0
         when 1
             calc_disc_each(attrs[:items])
         else
@@ -62,11 +62,10 @@ class Campaign
     end
 
     def calc_disc_each(items)
-        total = items.map { |item| item.price }.sum
         if items.length >= @quantity
-            [items.length * @price.to_f, total].min #should never be more expensive buying more
+            total = items.map { |item| [item.price, @price.to_f].min }.sum #should never be more expensive buying more
         else
-            total
+            items.map { |item| item.price }.sum
         end
     end
 end

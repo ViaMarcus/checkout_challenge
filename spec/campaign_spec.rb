@@ -2,7 +2,7 @@ require './lib/item.rb'
 require './lib/campaign.rb'
 describe Campaign do
     items = [Item.new({name: 'Red Tie', price: 9.25}),
-            Item.new({name: 'Sweather', price: 45.0}),
+            Item.new({name: 'Sweater', price: 45.0}),
             Item.new({name: 'Skirt', price: 19.95}),
             Item.new({name: 'Yellow Tie', price: 9.25})]
     subject(:a) {described_class.new({type: 0, quantity: 60, price: '90%' })} # total discount example

@@ -6,7 +6,6 @@ class Item
         @@next_id += 1
         @name =   setName(attrs[:name])
         @price =  setPrice(attrs[:price])
-        puts @id
     end
 
     private 
