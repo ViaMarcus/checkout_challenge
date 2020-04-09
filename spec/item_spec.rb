@@ -7,6 +7,19 @@ describe Item do
         expect(subject.name).to eq 'Chips'
     end
 
+    it 'will raise an error if it does not have a name' do
+        expect{ described_class.new({price: 55}) }.to raise_error 'Item must have a name'
+    end
+
+    it 'will raise an error if it does not have a price' do
+        expect{ described_class.new({name: 'Chips'}) }.to raise_error 'Item must have a price'
+    end
+
+    it 'will raise an error if it has an invalid price' do
+        expect{ described_class.new({name: 'Chips', price:-5}) }.to raise_error 'Price must be a positive number'
+        expect{ described_class.new({name: 'Chips', price: "asd"}) }.to raise_error 'Price must be a positive number'
+    end
+
     it 'will have a price' do
         expect(subject.price).to eq 55
     end
