@@ -6,7 +6,7 @@ class Campaign
     $SPECIAL_PRICE = 3 #Special price for one item right now (item, price)
     $SET_PRICE = 4 #Special set price, e.g. 3 for 10 (item, price, quantity)
     $COMBINE_FREELY = 5 #Special set price, but it covers several items (items, price, quantity)
-    attr_accessor 
+    attr_accessor :items, :quantity, :price, :type
 
     def initialize(attrs = {})
         @items
@@ -48,7 +48,7 @@ class Campaign
     end
 
     def calculate_total(total)
-        if total > @quantity 
+        if (total > @quantity && @type == 0) 
             parse_percent(total)
         else
            total
@@ -62,6 +62,7 @@ class Campaign
     end
 
     def calc_disc_each(items)
+        puts "calculating subtotal for #{items} "
         if items.length >= @quantity
             total = items.map { |item| [item.price, @price.to_f].min }.sum #should never be more expensive buying more
         else

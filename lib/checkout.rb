@@ -2,7 +2,7 @@ require './lib/item.rb'
 require './lib/campaign.rb'
 
 class Checkout
-    attr_accessor :total
+    attr_accessor :items
 
     def initialize(campaigns)
         @campaigns = campaigns
@@ -15,22 +15,18 @@ class Checkout
 
     def total
         left = @items
-        total = 0
+        toto = 0
         @campaigns.each { |camp|
-            do_now = []
-            do_later = []
-            left.each { |item|
-                if camp[:items].include?(item)
-                    do_now << item
-                else
-                    do_later << item
-                end
-            left = do_later
-            }
-            total += camp.calculate_subtotal(do_now)
+            do_now = left.select {|item| camp.items.include?(item)}
+            puts do_now
+            left.delete_if {|item| camp.items.include?(item)}
+            puts left
+            toto += camp.calculate_subtotal({items: do_now})
+            puts toto
         }
-        total += left.map {|item| item[:price]}.sum
-        total
+        toto += left.map {|item| item.price}.sum
+        co_camp = @campaigns.detect { |camp| camp.type == 0} || Campaign.new(type: 0, quantity: 0, price: "100%" )
+        co_camp.calculate_total(toto)
     end
 
     def print_receipt
