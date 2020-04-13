@@ -58,7 +58,7 @@ class Campaign
     def to_text
         case @type
         when 0
-            "Get #{100-parse_percent(@price)} discount on entire purchase when buying for at least #{@quantity}"
+            "Get #{100 - parse_percent(100)} % discount on entire purchase when buying for at least #{@quantity}"
         when 1
             "When buying #{@quantity} or more of #{items.map {|item| "#{item.name}, "}} they cost only #{@price}!"
         when 2..5
