@@ -73,7 +73,6 @@ class Campaign
     end
 
     def calc_disc_each(items)
-        puts "calculating subtotal for #{items} "
         if items.length >= @quantity
             total = items.map { |item| [item.price, @price.to_f].min }.sum #should never be more expensive buying more
         else

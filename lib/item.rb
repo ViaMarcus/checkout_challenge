@@ -13,7 +13,7 @@ class Item
     def setName(name)
         name.nil? ? (raise 'Item must have a name') : @name=name
     end
-    
+       
     def setPrice(price)
         if !price.nil? && price.to_f > 0
             @price = price.to_f
